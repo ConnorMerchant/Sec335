@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Takes in a network and scans all ips in the network for designated port
+network=$1
+port=$2
+
+
+
+for addr in `seq 1 254`; do
+   timeout .1 bash -c "echo >/dev/tcp/$network.$addr/$port" 2>/dev/null &&
+	echo "$network.$addr,$port"
+
+done
