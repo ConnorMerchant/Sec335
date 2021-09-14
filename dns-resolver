@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# given the intup of a target network and target dns server will do ns lookup
+
+network=$1
+targetdns=$2
+
+
+
+for addr in `seq 1 254`; do
+   output=$(timeout .1 nslookup $network.$addr $targetdns)
+	[[ $? -eq 0 ]] && echo $output
+
+done
